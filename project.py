@@ -52,3 +52,31 @@ class RandomPhrase:
     def get(self):
         author = choice(self.authors)
         return (author, choice(self.phrases[author]))
+        class Button:
+    def __init__(self, coord, color, text, text_size, text_color, funct):
+        self.sc = pg.display.get_surface()
+        self.coord = coord
+        self.color = color
+        self.funct = funct
+        rended_text = pg.font.SysFont("arial", text_size).render(text, 1, text_color)
+        x, y = rended_text.get_size()
+        self.image = pg.Surface(coord[2:])
+        self.image.fill(color)
+        self.image.blit(rended_text, ((coord[2] - x)//2, (coord[3] - y)//2))
+        self.activ = True
+        self.onButton = False
+    def update(self):
+        self.sc.blit(self.image, (self.coord[0], self.coord[1]))
+        if self.activ:
+            x, y = pg.mouse.get_pos()
+            if self.coord[0] < x < self.coord[0] + self.coord[2] and self.coord[1] < y < self.coord[1] + self.coord[3]:
+                if pg.mouse.get_pressed(3)[0]:
+                    self.onButton = True
+                else:
+                    if self.onButton:
+                        self.funct()
+                        self.onButton = False
+
+if "__main__" == name:
+    app = App()
+    app.run()
