@@ -34,3 +34,21 @@ class App:
         x, y = text.get_size()
         self.sc.blit(text, (400 - x//2, 200 - y//2),)
         self.sc.blit(pg.font.SysFont("arial", 16, bold=True).render(self.current_phrase[0], 1, (64,81,78)), (350 + x//2, 220))
+
+class RandomPhrase:
+    def __init__(self):
+        self.phrases = {}
+        self.authors = []
+    def load(self):
+        with open("phrases.txt", "r", encoding='utf-8') as f:
+            for t in f.read().split("\n"):
+                if t == "0":
+                    break
+                if ":" in t:
+                    self.authors.append(t[:-1])
+                    self.phrases[self.authors[-1]] = []
+                else:
+                    self.phrases[self.authors[-1]].append(t)
+    def get(self):
+        author = choice(self.authors)
+        return (author, choice(self.phrases[author]))
