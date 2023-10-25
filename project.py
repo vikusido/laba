@@ -78,6 +78,6 @@ class Button:
                         self.funct()
                         self.onButton = False
 
-if "__main__" == name:
+if "__main__" == __name__:
     app = App()
     app.run()
