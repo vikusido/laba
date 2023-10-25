@@ -52,7 +52,8 @@ class RandomPhrase:
     def get(self):
         author = choice(self.authors)
         return (author, choice(self.phrases[author]))
-        class Button:
+
+class Button:
     def __init__(self, coord, color, text, text_size, text_color, funct):
         self.sc = pg.display.get_surface()
         self.coord = coord
